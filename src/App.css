@@ -176,7 +176,7 @@ input:checked {
     /* transition: transform 500ms ease-out; */
     font-family: 'Nunito', sans-serif;
     font-weight: 600;
-    box-shadow: 0 8px 16px 0 hsla(219, 100%, 79%, 20%);
+    box-shadow: 2px 5px 3px 0 hsla(219, 100%, 79%, 30%);
 }
 
 .toast.active {
