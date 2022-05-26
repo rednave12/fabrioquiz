@@ -1,38 +1,236 @@
-.App {
-  text-align: center;
+:root {
+	--dark: #221638;
+    --grey: #606060;
+    --bright: #3795f5;
+    --light: #75b5f4;
+    --lightest: #e9f6fe;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html, body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#root {
+    height: 100vh;
+    width: 100vw;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.app {
+    background-image: url(../public/bg.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+.quizTile {
+    border-radius: 5px;
+    box-shadow: 0 8px 16px 0 hsla(219, 100%, 79%, 20%);
+    border: 1px solid hsla(210, 85%, 71%, 30%);
+    background-color: #fff;
+    height: 50%;
+    width: 80%;
+    display: flex;
+    max-width: 1000px;
+    flex-direction: column;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.quizHeader {
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    /* gap: 1.5rem; */
+    border-bottom: 1px solid var(--light);
+}
+
+.questionNumber {
+    border-radius: 5px 0 0 0;
+    background-color: var(--light);
+    padding: 1rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    padding: 0 1.5rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    color: --dark;
+}
+
+.quizMain {
+    display: flex;
+    flex-grow: 1;
+    padding: 1rem 2rem;
+    gap: 3rem;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-grow: 1;
+    gap: 0.75rem;
+}
+
+button {
+    border-radius: 5px;
+    background-color: var(--bright);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    border: none;
+    padding: 0.5rem 2rem;
+    max-height: 40px;
+    align-self: flex-end;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 4px 0 0 #1c61a7; 
+    transition: box-shadow 100ms ease-in-out, transform 100ms ease-in-out;
+}
+
+button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 0 #1c61a7;
+}
+
+/* button::after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translateY(-5px);
+    left: 0;
+    content: '';
+    background-color: #221638;
+
+} */
+
+.option {
+    background-color: var(--lightest);
+    border-radius: 5px;
+    padding: 1rem;
+    color: var(--grey);
+    box-shadow: 4px 4px 4px 0 hsla(0, 0%, 0%, 25%);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: background-color 250ms ease-out;
+}
+
+.option.selected {
+    background-color: #9dd7fb;
+    /* font-weight: 600; */
+}
+
+.option.correct {
+    background-color: hsl(122, 43%, 75%);
+    transition: background-color 300ms ease-out 150ms;
+
+}
+
+.option.incorrect {
+    background-color: hsl(0, 43%, 75%);
+    transition: background-color 300ms ease-out 150ms;
+
+}
+
+input[type=checkbox] {
+    -webkit-appearance: none;
+    border: 1px solid var(--light);
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+input:checked {
+    background-color: var(--bright);
+    background-image: url(../public/tick.svg);
+    background-size: 65%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.toast {
+    position: absolute;
+    background-color: var(--light);
+    min-width: 40%;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    color: #fff;
+    bottom: 0;
+    border-radius: 5px;
+    transform: translateY(5rem);
+    /* transition: transform 500ms ease-out; */
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+    box-shadow: 0 8px 16px 0 hsla(219, 100%, 79%, 20%);
+}
+
+.toast.active {
+    animation: bounceIn 700ms ease-out forwards;
+}
+
+.toast.active.incorrect {
+    animation: bounceIn 700ms ease-out forwards, shake 250ms ease-out 750ms;
+
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: translateY(10rem);
+    }
+
+    75% {
+        transform: translateY(-5.5rem);
+    }
+
+    100% {
+        transform: translateY(-5rem);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .quizMain {
+        flex-direction: column;
+    }
+
+    button {
+        align-self: center;
+    }
+
+    .quizTile {
+        height: unset;
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0) translateY(-5rem);
+    }
+
+    33% {
+        transform: translateX(-5px) translateY(-5rem);
+    }
+
+    66% {
+        transform: translateX(5px) translateY(-5rem);
+    }
+
+    100% {
+        transform: translateX(0) translateY(-5rem);
+    }
 }
