@@ -156,7 +156,6 @@ input[type=checkbox] {
 }
 
 input:checked {
-    background-color: var(--bright);
     background-image: url(../public/tick.svg);
     background-size: 65%;
     background-position: center;
